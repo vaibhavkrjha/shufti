@@ -14,7 +14,7 @@ listing(){
 if [[ -d /opt/sifter/results/Rapidscan ]]; then
     echo ""
 else
-    mkdir /opt/sifter/results/Rapidscan
+    mkdir /opt/shufti/results/Rapidscan
 fi
 echo -e "${RED}"
 figlet -f mini "RapidscaN"
@@ -26,8 +26,5 @@ sleep 1
 echo "==================================================================================="
 xterm -e sudo rapidscan &
 echo -e "${W}When ready hit enter${NC}"
-cd /opt/sifter
-sifter -m
-
-
-##########################______________ czFsM250NzggX18gUmFiYjE3J3MgRGVu ______________##########################
+cd /opt/shufti
+shufti -m
