@@ -1,0 +1,27 @@
+#!/bin/bash
+RED='\033[0;31m'
+NC='\033[0m'
+ORNG='\033[0;33m'
+W='\033[1;37m'
+INV='\e[7m'
+URED='\033[4;31m'
+UBLUE='\033[4;34m'
+
+echo -e "${RED}"
+figlet shufti
+echo -e "${NC}"
+sudo docker start shufti
+echo -e "${YLW}To detach from docker container ${RED}hold Ctrl and ${W}press P + Q${NC}"
+sudo docker attach sifter
+echo -e "${W}Would you like to export results to your Desktop?(y/n)${NC}"
+read OPT
+if [[ ${OPT} == "y" ]]; then
+	sudo docker cp sifter:/opt/shufti/results /home/$USER/Desktop
+else
+	sleep 1
+fi
+echo -e "${ORNG}"
+figlet -f mini "Stopping shufti"
+echo -e "${NC}"
+sudo docker stop shufti
+
