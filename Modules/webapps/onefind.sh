@@ -7,10 +7,10 @@ YLW='\033[1;33m'
 LBBLUE='\e[104m'
 RED='\033[0;31m'
 
-if [[ -d '/opt/sifter/resuls/OneFind' ]]; then
+if [[ -d '/opt/shufti/results/OneFind' ]]; then
 	sleep 2
 else
-	mkdir /opt/sifter/results/OneFind
+	mkdir /opt/shufti/results/OneFind
 fi
 cd /opt/onedrive_user_enum
 echo -e "${RED}"
@@ -30,9 +30,7 @@ else
 fi
 echo -e "${W}Please enter the domain to enumerate against${NC}"
 read DOMAIN
-python onedrive_enum.py ${TARGET} -d ${DOMAIN} -o /opt/sifter/results/OneFind/${TARGET}_enum.log
+python onedrive_enum.py ${TARGET} -d ${DOMAIN} -o /opt/shufti/results/OneFind/${TARGET}_enum.log
 echo "==============================================================================================="
-cd /opt/sifter
-./sifter -m
-
-##########################______________ czFsM250NzggX18gUmFiYjE3J3MgRGVu ______________##########################
+cd /opt/shufti
+./shufti -m
