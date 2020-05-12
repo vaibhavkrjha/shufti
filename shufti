@@ -46,7 +46,7 @@ cred_mods(){
   echo -e "${YLW}eg. web-directories, enterprise email addresses, etc."
   echo -e "${ORNG}"
   PS3='Which tool would you like to use?'
-          options=("theHarvester" "Osmedeus" "ReconSpider" "CredNinja" "Back" "Quit") # "Sunny-Honey \n ssh HoneyPot"
+          options=("theHarvester" "Osmedeus" "ReconSpider" "CredNinja" "Back" "Quit") 
           select opt in "${options[@]}"
           do
                   case $opt in
