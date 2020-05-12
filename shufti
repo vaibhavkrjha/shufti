@@ -1,0 +1,1245 @@
+#!/bin/bash
+LPATH='/opt/shufti/'
+ORNG='\033[0;33m'
+NC='\033[0m'
+W='\033[1;37m'
+LP='\033[1;35m'
+YLW='\033[1;33m'
+LBBLUE='\e[104m'
+RED='\033[0;31m'
+LGRY='\033[0;37m'
+INV='\e[7m'
+BRED='\033[1;31m'
+UPURPLE='\033[4;35m'
+UBLUE='\033[4;34m'
+URED='\033[4;31m'
+ARG=$2  
+# IP addition argument
+# Help Menu
+usage() {                                    	  # Function: Print a help message.
+	echo -e  "${YLW}Shufti Help Menu${NC}"
+	echo "*****************"
+	echo "+"
+	echo "+"
+	echo "# shufti runs the programs bringing up the menu in a cli environment"
+	echo "# shufti -c will check the exsiting hosts in the hostlist"
+	echo "# shufti -a '<target-ip>' must be added with '' and then automattically appends the hostname/IP to host file"
+	echo "# shufti -e Opens the Exploitation Module"
+	echo "# shufti -i Opens the Info-based Module menu"
+	echo "# shufti -d Opens the Domain Focused Modules"
+	echo "# shufti -n Opens the Network Mapping Modules menu"
+	echo "# shufti -w Opens the Website Focused Modules"
+	echo "# shufti -wa Opens the Web-App Focused Module menu"
+	echo "# shufti -v Opens the Vulnerability Scanning Module Menu"
+    echo "# shufti -m Opens the Module Menu directly"
+	echo "# shufti -u Checks for any updates on Github"
+    echo "# shufti -z Opens the Module Information Menu"
+	echo "# shufti -h This Help Menu" 1>&2
+}
+# Information Modules
+# Enterprise Target Info
+cred_mods(){
+  cd /opt/sifter
+  echo -e "${RED}"
+  figlet -f mini "Enterprise Information Gatherers"
+  echo -e "${LP}This module focuses on Enterprises and their online presence"
+  echo -e "${YLW}eg. web-directories, enterprise email addresses, etc."
+  echo -e "${ORNG}"
+  PS3='Which tool would you like to use?'
+          options=("theHarvester" "Osmedeus" "ReconSpider" "CredNinja" "Back" "Quit") # "Sunny-Honey \n ssh HoneyPot"
+          select opt in "${options[@]}"
+          do
+                  case $opt in
+                            "theHarvester")
+                                ./modules/credmods/harvester.sh
+                                ;;
+
+                            "Osmedeus")
+                                ./modules/credmods/osmedeus.sh
+                                ;;
+
+                            "ReconSpider")
+                                ./modules/credmods/rspider.sh
+                                ;;
+
+                            "CredNinja")
+                                ./modules/postex/credninja.sh
+                                ;;
+                            
+                            "Back")
+                                modules
+                                ;;
+
+                            "Quit")
+                                exit 2
+                                ;;
+                    esac
+            done
+            echo -e "${NC}"
+}
+# Individual Target Info
+phone_mods(){
+  cd /opt/shufti
+  echo -e "${RED}"
+  figlet -f mini "Targeted Information Gatherers"
+  echo -e "${LP}This module focuses on individual targets."
+  echo -e "${YLW}eg. Social media information, phone number information, etc."
+  echo -e "${ORNG}"
+  PS3='Which tool would you like to use?'
+          options=("Seeker" "Sherlock" "xRay" "Maryam" "Back" "Quit") 
+          select opt in "${options[@]}"
+          do
+                  case $opt in
+                            "Seeker")
+                                ./modules/credmods/seeker.sh
+                                ;;
+
+                            "Sherlock")
+                                ./modules/credmods/sherlock.sh
+                                ;;
+
+                            "Maryam")
+                                ./modules/credmods/maryam.sh
+                                ;;
+
+                            "xRay")
+                                ./modules/credmods/xray.sh
+                                ;;
+
+                            "Back")
+                                modules
+                                ;;
+
+                            "Quit")
+                                exit 1
+                                ;;
+                    esac
+            done
+            echo -e "${NC}"
+}
+# Info Module-Category Selection
+info_mods(){
+    cd /opt/shufti
+    echo -e "${RED}"
+    figlet -f mini "Information Gatherers"
+    echo -e "${ORNG}"
+    PS3='Select The Module To Gather Information About'
+            options=("Enterprise Focus" "Individual Focus" "Back" "Quit")
+            select opt in "${options[@]}"
+            do
+                    case $opt in
+                            "Enterprise Focus")
+                                cred_mods
+                                ;;
+
+                            "Individual Focus")
+                                phone_mods
+                                ;;
+
+                            "Back")
+                                modules
+                                ;;
+
+                            "Quit")
+                                exit 1
+                                ;;
+                    esac
+            done
+        echo -e "${NC}"
+
+}
+# HoneyPot Scanners
+honey_mods(){
+    cd /opt/shufti
+    echo -e "${RED}"
+    figlet -f mini "HoneyPot Detection Systems"
+    echo -e "${LP}This module focuses on Enterprises and their online presence"
+    echo -e "${YLW}eg. web-directories, enterprise email addresses, etc."
+    echo -e "${ORNG}"
+    PS3='Whch tool would you like to use?'
+            options=("HoneyCaught" "SniffingBear" "Back" "Quit") # "Sunny-Honey \n ssh HoneyPot"
+            select opt in "${options[@]}"
+            do
+                    case $opt in
+                            "HoneyCaught")
+                                ./modules/honeymods/honeyc.sh
+                                ;;
+
+                            "SniffingBear")
+                                ./modules/honeymods/s_bear.sh
+                                ;;
+
+                            "Back")
+                                modules
+                                ;;
+
+                            "Quit")
+                                exit 1
+                                ;;
+                    esac
+            done
+        echo -e "${NC}"
+
+}
+# Domain Modules
+dom_mods(){
+  cd /opt/shufti
+  echo -e "${RED}"
+  figlet -f mini "Domain Recon Gathering"
+  echo -e "${ORNG}"
+  PS3='Which tool would you like to use?'
+          options=("DnsTwist" "Armory" "SayDog" "Back" "Quit") 
+          select opt in "${options[@]}"
+          do
+                  case $opt in
+                            "DnsTwist")
+                                ./modules/dommods/dnstwist.sh
+                                ;;
+
+                            "Armory")
+                                ./modules/dommods/armory.sh
+                                ;;
+                                                        
+                            "SayDog")
+                                sdog
+                                ;;
+
+                            "Back")
+                                modules
+                                ;;
+
+                            "Quit")
+                                exit 1
+                                ;;
+                    esac
+            done
+            echo -e "${NC}"
+}
+# Network Modules
+net_mods(){
+  cd /opt/shufti
+  echo -e "${RED}"
+  figlet -f mini "Network Scanners"
+  echo -e "${ORNG}"
+  PS3='Which tool would you like to use?'
+          options=("nMap" "Arp-Scan" "AttackSurfaceMapper" "wafw00f" "aSnip" "Back"  "Quit")
+          select opt in "${options[@]}"
+          do
+                  case $opt in
+                            "nMap")
+                                ./modules/netmods/nmap.sh
+                                ;;
+
+                            "Arp-Scan")
+                                sudo arp-scan -l
+                                ;;
+
+                            "AttackSurfaceMapper")
+                                ./modules/netmods/asm.sh
+                                ;;
+
+                            "wafw00f")
+                                ./modules/netmods/wafw00f.sh
+                                ;;
+
+                            "aSnip")
+                                ./modules/netmods/asnip.sh
+                                ;;
+
+                            "Back")
+                                modules
+                                ;;
+
+                            "Quit")
+                                exit 2
+                                ;;
+                    esac
+            done
+            echo -e "${NC}"
+}
+# Vulnerability Scanners
+vuln_mods(){
+  cd /opt/shufti
+  echo -e "${RED}"
+  figlet -f mini "Vulnerability Scanners"
+  echo -e "${ORNG}"
+  PS3='Which tool would you like to use?'
+          options=("Flan" "RapidScan" "Yuki-Chan" "Back" "Quit")
+          select opt in "${options[@]}"
+          do
+                  case $opt in
+                            "Flan")
+                                ./modules/vulnscanners/flan.sh
+                                ;;
+
+                            "RapidScan")
+                                ./modules/vulnscanners/rapidscan.sh
+                                ;;
+
+                            "Yuki-Chan")
+                                ./modules/vulnscanners/yuki.sh
+                                ;;
+
+                            "Back")
+                                modules
+                                ;;
+
+                            "Quit")
+                                exit 1
+                                ;;
+                    esac
+            done
+            echo -e "${NC}"
+}
+# Web-Focused Modules
+web_mods(){
+  cd /opt/shufti
+  echo -e "${RED}"
+  figlet -f mini "Website Scanners & Enumerators"
+  echo -e "${ORNG}"
+  PS3='Which tool would you like to use?'
+          options=("Dirb" "Nikto" "BlackWidow" "WPScan" "WPForce" "Zeus" "Back" "Quit")
+          select opt in "${options[@]}"
+          do
+                  case $opt in
+							"Dirb")
+								./modules/webmods/dirb.sh
+								;;
+
+                            "Nikto")
+                                ./modules/webmods/nikto.sh
+                                ;;
+
+                            "BlackWidow")
+                                ./modules/webmods/widow.sh
+                                ;;
+
+                            "WPForce")
+                                echo -e "${YLW}WPScan & WPForce"
+                                echo -e "${W}Tools for use against wordpress${NC}"
+                                sleep 3
+                                ./modules/webmods/wordpress.sh
+                                ;;
+
+                            "Zeus")
+                                ./modules/webmods/zeus.sh
+                                ;;
+
+                            "Back")
+                                modules
+                                ;;
+
+                            "Quit")
+                                exit 2
+                                ;;
+                    esac
+            done
+            echo -e "${NC}"
+}
+# Post Exploitation
+post_ex(){
+    echo -e "${RED}"
+    figlet -f mini "Post-Exploitation"
+    echo -e "${NC}"
+    PS3='Which tool would you like to use?'
+        options=("EoP Exploit" "CredNinja" "WinPwn" "CredHarvester" "Back")
+        select opt in "${options[@]}"
+        do
+            case $opt in
+                "EoP Exploit")
+                    echo -e "${W}The EoP module helps elevate user privileges on an exploited system${NC}"
+                    ./modules/postex/EoP.sh
+                    ;;
+
+                "PHPSploit")
+                    echo -e "${W}This tool acts as a Command n Control Server for call-back of exploited systems${NC}"
+                    ./modules/postex/phpsploit.sh
+                    ;;                    
+
+                "WinPwn")
+                    echo -e "${W}This module checks for internal system privilege escalation methods that could be used to elevate user privs${NC}"
+                    ./modules/postex/winpwn.sh
+                    ;;
+
+                "CredHarvester")
+                    echo -e "${W}Python3 tool to gather credentials on a successfully infultrated machine${NC}"
+                    ./modules/postex/credharvester.sh
+                    ;;
+
+                "Back")
+                    ex_mods
+                    ;;
+            esac
+        done
+    echo -e "${NC}"
+}
+# Exploitation Modules
+ex_mods(){
+  cd /opt/shufti
+  echo -e "${RED}"
+  figlet -f mini "Exploitation Tools"
+  echo -e "${ORNG}"
+  PS3='Which tool would you like to use?'
+        options=("MS Specific Tools" "BruteDUM" "TigerShark" "Web Exploiters" "Search for Exploits" "Post-Exploitation" "Back" "Quit")
+        select opt in "${options[@]}"
+        do
+                case $opt in
+                    "MS Specific Tools")
+                        echo -e "${YLW}These tools are used to exploit MicroSoft systems${NC}"
+                        sleep 3
+                        ms_tools
+			            ;;
+
+                    "BruteDUM")
+                        bruters
+                        ;;
+
+                    "TigerShark")
+                        echo -e "${YLW}TigerShark is a multi-tooled phishing framework${NC}"
+                        sleep 3
+                        ./modules/exmods/tiger.sh
+                        ;;
+
+                    "Web Exploiters")
+                        echo -e "${YLW}These tools are aimed at exploiting websites${NC}"
+                        sleep 3
+                        web_tools
+                        ;;
+
+                    "Search for Exploits")
+                        echo -e "${YLW}These tools allow you to search to certain exploits or vulnerabilities${NC}"
+                        sleep 3
+                        search_tools
+                        ;;
+
+                    "Post-Exploitation")
+                        post_ex
+                        ;;
+
+                    "Back")
+                        modules
+                        ;;
+
+                    "Quit")
+                        exit 2
+                        ;;
+
+                esac
+        done
+    echo -e "${NC}"
+}
+# BruteForce Modules
+bruters(){
+    cd /opt/shufti
+    echo -e "${RED}"
+    figlet -f mini "BruteDUM"
+    echo -e "${ORNG}"
+    echo -e "${YLW}BruteDUM is a bruteforcing tool that consists of Medusa, nCrack, Hydra${NC}"
+    sleep 3
+    ./modules/exmods/brutedum.sh
+}
+sdog(){
+    cd /opt/shufti
+    echo -e "${RED}"
+    figlet -f mini "SayDog"
+    echo -e "${ORNG}"
+    echo -e "${YLW}SayDog is a multi-purpose exploitation tool. Aimed at web exploitation and vuln-analysis${NC}"
+    sleep 3
+    ./modules/dommods/sdog.sh
+}
+# Exploit Searchers
+search_tools(){
+    cd /opt/shufti
+    echo -e "${RED}"
+    figlet -f mini "Exploit Finders"
+    echo -e "${ORNG}"
+    PS3='Which tool would you like to use?'
+        options=("ShodanSploit" "FindSploit" "Back" "Quit")
+        select opt in "${options[@]}"
+        do
+                case $opt in
+                    "ShodanSploit")
+                        echo -e "${YLW}ShodanSploit allows for shodan searches to be done in the terminal${NC}"
+                        sleep 3
+                        ./modules/exmods/ssploit.sh
+                        ;;
+
+                    "FindSploit")
+                        echo -e "${YLW}This tool allows you to search, copy or compile exploits${NC}"
+                        sleep 3
+                        ./modules/exmods/fsploit.sh
+                        ;;
+
+                    "Back")
+                        modules
+                        ;;
+
+                    "Quit")
+                        exit 1
+                        ;;
+
+                esac
+        done
+    echo -e "${NC}"
+}
+# MicroSoft Exploitation
+ms_tools(){
+  cd /opt/shufti
+  echo -e "${RED}"
+  figlet -f mini "MicroSoft Exploitation Tools"
+  echo -e "${ORNG}"
+  PS3='Which tool would you like to use?'
+        options=("ActiveReign" "iSpy" "FuzzyDander" "SMBGhost" "Back" "Quit")
+        select opt in "${options[@]}"
+        do
+                case $opt in
+			              "ActiveReign")
+			                    echo -e "${YLW}ActiveReign is a LDAP Network-Attack toolkit${NC}"
+                                sleep 3
+                                ./modules/exmods/ar3.sh
+			                    ;;
+
+                          "iSpy")
+                                echo -e "${YLW}iSpy is a Microsft 'blue' vulnerability scanner${NC}"
+                                sleep 3
+                                ./modules/exmods/ispy.sh
+			                    ;;
+
+                            "FuzzyDander")
+                                echo -e "${LP}FuzzBunch & DanderSpritz Framework,"
+                                echo -e "codename:${RED}FuzzyDander${NC}"
+                                echo -e "${YLW}If you do not know what these tools are or how they work,"
+                                echo -e "you should not be using them. As such no instructions will be added.${NC}"
+                                if [[ ! -f '/opt/sifter/modules/exmods/fuzzdander.sh' ]]; then
+                                    echo -e "${URED}You do not have this module, please post an issue request on vaibhavkumar2012@gmail.com"
+                                   
+                                else
+                                    echo -e "${W}Would you like to continue?(y/n)${NC}"
+                                    read M_ANS
+                                    if [[ ${M_ANS} == 'y' ]]; then
+                                        ./modules/exmods/fuzzydander.sh
+                                    else
+                                        ex_mods
+                                    fi
+                                fi
+                                ms_tools
+                                ;;
+
+                            "SMBGhost")
+                                echo -e "${LP}SMBGhost scans for the CVE-2020-0796 vulnerability in Windows SMB3 protocol${NC}"
+                                sleep 3
+                                ./modules/exmods/smbghost.sh
+                                ;;
+
+                            "Back")
+                                modules
+                                ;;
+
+                           "Quit")
+                                exit 1
+                                ;;
+                esac
+        done
+    echo -e "${NC}"
+}
+# DDoS Tools
+ddos(){
+      cd /opt/shufti
+      echo -e "${RED}"
+      figlet -f mini "DDoS Tools"
+      echo -e "${ORNG}"
+      PS3='Which tool would you like to use?'
+        options=("Dark Star" "NekoBot" "xShock" "VulnX" "Back" "Quit")
+        select opt in "${options[@]}"
+        do
+            case $opt in
+                "Dark Star")
+                    ./modules/exmods/dark_star.sh
+                    ;;
+
+                "Impulse")
+                    ./modules/exmods/impulse.sh
+                    ;;
+
+                "Back")
+                    web_tools
+                    ;;
+
+            esac
+        done
+    echo -e "${NC}"
+}             
+# Web Exploitation
+web_tools(){
+  cd /opt/shufti
+  echo -e "${RED}"
+  figlet -f mini "Website Exploitation Tools"
+  echo -e "${ORNG}"
+  PS3='Which tool would you like to use?'
+        options=("DDoS" "NekoBot" "xShock" "VulnX" "Back" "Quit")
+        select opt in "${options[@]}"
+        do
+                case $opt in
+                    "NekoBot")
+                        echo -e "${YLW}NekoBot is a Web-Shell exploitation framework${NC}"
+                        ./modules/exmods/nekobot.sh
+                        ;;
+
+                    "DDoS")
+                        ddos
+                        ;;
+
+                    "xShock")
+                        echo -e "${YLW}xShock is a shellshock exploitation tools${NC}"
+                        sleep 3
+                        ./modules/exmods/xshock.sh
+                        ;;
+
+                    "VulnX")
+                        ./modules/exmods/vulnx.sh
+                        ;;
+
+			        "Back")
+                        modules
+                        ;;
+
+                    "Quit")
+                        exit 1
+                        ;;
+                esac
+        done
+    echo -e "${NC}"
+}
+# Web-App Modules
+webapps(){
+  cd /opt/shufti
+  echo -e "${RED}"
+  figlet -f mini "Web Appplication Scanners"
+  echo -e "${ORNG}"
+  PS3='Which tool would you like to use?'
+        options=("Sitadel" "BFAC" "AapFinder" "OneFind" "Back" "Quit")
+        select opt in "${options[@]}"
+        do
+                case $opt in
+                        "Sitadel")
+                            ./modules/webapps/sitadel.sh
+                            ;;
+
+                        "AapFinder")
+                            ./modules/webapps/aapfinder.sh
+                            ;;
+
+                        "BFAC")
+                            ./modules/webapps/bfac.sh
+                            ;;
+
+                        "OneFind")
+                            ./modules/webapps/onefind.sh
+                            ;;
+
+                        "Back")
+                            modules
+                            ;;
+
+                        "Quit")
+                            exit 1
+                            ;;
+                esac
+        done
+    echo -e "${NC}"
+}
+# Host Check
+check_hosts(){
+    TARLIST=$(cat /opt/sifter/files/host_list.txt | grep "eg. prey.com")
+    if [[ ${TARLIST} == "eg. prey.com" ]]; then
+        rm /opt/shufti/files/host_list.txt
+        echo -e "${RED}Please add an appropriate target first${NC}"
+        nano /opt/shufti/files/host_list.txt
+    else
+        sleep 1
+    fi
+    echo -e "${ORNG}Host Check${NC}"
+    	echo -e "${ORNG}***********${NC}"
+        if [[ -f 'files/pingtest_raw.pass' ]]; then
+    	    rm files/pingtest_raw.pass
+        fi
+        if [[ -f 'files/pingtest.pass' ]]; then
+            rm files/pingtest.pass
+        fi
+        if [[ -f 'files/pingtest_pass.txt' ]]; then
+            rm files/pingtest_pass.txt
+        fi
+
+    	for name in `cat files/host_list.txt`
+
+    	        do
+    	            ping -c 1 $name
+    	                if [[ $? == 0 ]]; then
+    	                    echo -e "${LP}=================="
+    	                    echo -e "\e[95m$name Alive\e[0m" && echo $name >> files/pingtest_raw.pass
+    	                    echo -e "${LP}==================${NC}"
+    	                else
+    	                    echo -e "${RED}=================="
+    	                    echo -e "\e[1;31m$name Dead\e[0m" && echo $name >> files/pingtest_raw.fail
+    	                    echo -e "${RED}==================${NC}"
+    	                fi
+    	        done
+
+	                sleep 5
+
+            echo "============================================================================================================================="
+
+        	echo -e "\e[95mPingtest_Pass\e[0m"
+            	echo $'\e[95m*************\e[0m'
+		        cat files/pingtest_raw.pass | sort | uniq > files/pingtest.pass
+        	    echo -e "${YLW}"
+		        cat files/pingtest.pass
+		        echo -e "${NC}"
+		        sed -e 's/^/http:\/\//' files/pingtest.pass > files/pingtest_pass.txt
+
+        	    echo "============================================================================================================================="
+
+	            echo -e "\e[1;31mPingtest_Fail\e[0m"
+	            echo $'\e[1;31m*************\e[0m'
+	            cat files/pingtest_raw.fail | sort | uniq > files/pingtest.fail
+	            echo -e "${YLW}"
+		        cat files/pingtest.fail
+		        echo -e "${NC}"
+	            sleep 5
+        	    menu
+}
+# List Argument Options Settings Below
+ip_add() {
+  echo -e "${W}Please enter your target:${NC}"
+  read IP_ANS
+  sleep 1
+  echo "$IP_ANS" >> files/host_list.txt
+  ip_q
+}
+ip_q() {
+  echo -e "${W}Would you like to add another?(y/n)${NC}"
+read ANS
+sleep 1
+if [[ $ANS == y ]]; then
+  ip_add
+else
+  menu
+fi
+}
+# Result Options
+result_choices(){
+    echo -e "${ORNG}"
+    ls
+    echo -e "${NC}"
+    PS3='Which tool would you like to do?'
+            options=("Check File" "Check Image" "Change Directory" "Back")
+            select opt in "${options[@]}"
+            do
+                    case $opt in
+                            "Check File")
+                                echo -e "${W}Please enter the file name${NC}"
+                                read FNAME
+                                if [[ ! -f '${FNAME}' ]]; then
+                                    echo -e "${FNAME} is a directory, please try changing directories instead.${NC}"
+                                else
+                                    echo -e "${W}==========================================================================${NC}"
+                                    cat ${FNAME}
+                                    kdialog --geometry 600x800 --textbox ${FNAME}
+                                    echo -e "${W}==========================================================================${NC}"
+                                fi
+                                result_choices
+                                ;;
+
+                             "Check Image")
+                                echo -e "${W}Please enter the image name${NC}"
+                                read INAME
+                                eom ${INAME}
+                                result_choices
+                                ;;
+
+                            "Change Directory")
+                                echo -e "${W}Please enter the directory name${NC}"
+                                read DIR_NAME
+                                cd ${DIR_NAME}
+                                result_choices
+                                ;;
+
+                            "Back")
+                                cd /opt/shufti
+                                modules
+                                ;;
+
+                    esac
+            done
+    echo -e "${NC}"
+}
+# Results
+results(){
+    echo -e "${YLW}Results"
+    echo -e "${LP}*******${NC}"
+    echo -e "${LP}"
+    cd /opt/shufti/results
+    ls
+    echo -e "${W}Please enter the name of the result directory you'd like to see${NC}"
+    read DNAME
+    cd ${DNAME}
+    echo -e "${LP}"
+    ls
+    result_choices
+    cd /opt/shufti
+}
+# Module Menu
+modules(){
+    echo -e "${URED}Modules${NC}"
+    echo -e "${ORNG}"
+    PS3='Whats your plan today?'
+            options=("Information Gatherers" "Domain Recon Gathering" "Network Scanners" "Website Scanners & Enumerators" "Vulnerability Scanners" "HoneyPot Detection Systems" "Exploitation Tools" "WebAppplication Scanners" "View Results" "Main Menu" "Module Info" "Quit")
+            select opt in "${options[@]}"
+            do
+                    case $opt in
+                            "Information Gatherers")
+                                info_mods
+                                ;;
+
+                            "Domain Recon Gathering")
+                                dom_mods
+                                ;;
+
+                            "Network Scanners")
+                                net_mods
+                                ;;
+
+                            "Website Scanners & Enumerators")
+                                web_mods
+                                ;;
+
+                            "Vulnerability Scanners")
+                                vuln_mods
+                                ;;
+
+                            "HoneyPot Detection Systems")
+                                honey_mods
+                                ;;
+
+                            "Exploitation Tools")
+                                ex_mods
+                                ;;
+
+			                "WebAppplication Scanners")
+			                    webapps
+			                    ;;
+
+                            "View Results")
+                                results
+                                ;;
+
+                            "Module Info")
+                                main_info
+                                ;;
+
+                            "Main Menu")
+                                menu
+                                ;;
+
+                            "Quit")
+                                exit 2
+                                ;;
+                    esac
+            done
+    echo -e "${NC}"
+}
+# Info
+main_info(){
+    echo -e "${URED}Info${NC}"
+    echo -e "${LGRY}"
+    PS3='Select the Module to gather information about.'
+            options=("Sitadel" "wafw00f" "BFAC" "AapFinder" "OneFind" "NekoBot" "ActiveReign" "BruteDUM" "BlackWidow" "Flan" "RapidScan" "Yuki-Chan" "SayDog" "AttackSurfaceMapper" "Armory" "aSnip" "DnsTwist" "Armory" "Omnibus" "Seeker" "xRay" "theHarvester" "Osmedeus" "ReconSpider" "Maryam" "xShock" "WinPwn" "PHPSploit" "CredNinja" "VulnX" "Module Menu" "Main Menu")
+            select opt in "${options[@]}"
+            do
+                    case $opt in
+                        "Sitadel")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/sitadel.info
+                            cat /opt/sifter/info/sitadel.info
+                            ;;
+
+                        "wafw00f")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/wafw00f.info
+                            cat /opt/sifter/info/wafw00f.info
+                            ;;
+
+                        "AapFinder")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/aapfinder.info
+                            cat /opt/sifter/info/aapfinder.info
+                            ;;
+
+                        "BFAC")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/bfac.info
+                            cat /opt/sifter/info/bfac.info
+                            ;;
+
+                        "OneFind")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/onefind.info
+                            cat /opt/sifter/info/onefind.info
+                            ;;
+
+                        "NekoBot")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/nekobot.info
+                            cat /opt/sifter/info/nekobot.info
+                            ;;
+
+                        "ActiveReign")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/activereign.info
+                            cat /opt/sifter/info/activereign.info
+                            ;;
+
+                        "BruteDUM")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/brutedum.info
+                            cat /opt/sifter/info/brutedum.info
+                            ;;
+
+                       "BlackWidow")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/blackwidow.info
+                            cat /opt/sifter/info/blackwidow.info
+                            ;;
+
+                        "Flan")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/flan.info
+                            cat /opt/sifter/info/flan.info
+                            ;;
+
+                        "RapidScan")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/rapidscan.info
+                            cat /opt/sifter/info/rapidscan.info
+                            ;;
+
+                        "Yuki-Chan")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/yuki.info
+                            cat /opt/sifter/info/yuki.info
+                            ;;
+
+                        "AttackSurfaceMapper")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/asm.info
+                            cat /opt/sifter/info/asm.info
+                            ;;
+
+                        "Armory")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/armory.info
+                            cat /opt/sifter/info/armory.info
+                            ;;
+
+                        "aSnip")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/asnip.info
+                            cat /opt/sifter/info/asnip.info
+                            ;;
+
+                        "DnsTwist")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/dnstwist.info
+                            cat /opt/sifter/info/dnstwist.info
+                            ;;
+
+                        "Omnibus")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/omnibus.info
+                            cat /opt/sifter/info/omnibus.info
+                            ;;
+
+                        "Seeker")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/seeker.info
+                            cat /opt/sifter/info/seeker.info
+                            ;;
+
+                        "xRay")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/xray.info
+                            cat /opt/sifter/info/xray.info
+                            ;;
+
+                        "theHarvester")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/theHarvester.info
+                            cat /opt/sifter/info/theHarvester.info
+                            ;;
+
+                        "Osmedeus")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/osmedeus.info
+                            cat /opt/sifter/info/osmedeus.info
+                            ;;
+
+                        "ReconSpider")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/reconspider.info
+                            cat /opt/sifter/info/reconspider.info
+                            ;;
+
+                        "Maryam")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/maryam.info
+                            cat /opt/sifter/info/maryam.info
+                            ;;
+
+                        "SayDog")
+                            kdialog --feometry 600x800 --textbox /opt/sifter/info/saydog.info
+                            cat /opt/sifter/info/saydog.info
+                            ;;
+
+                        "xShock")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/xshock.info
+                            cat /opt/sifter/info/xshock.info
+                            ;;
+
+                        "WinPwn")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/WinPwn.info
+                            cat /opt/sifter/info/WinPwn.info
+                            ;;
+
+                        "CredNinja")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/credninja.info
+                            cat /opt/sifter/info/credninja.info
+                            ;;
+
+                        "PHPSploit")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/phpsploit.info
+                            cat /opt/sifter/info/phpsploit.info
+                            ;;
+
+                        "VulnX")
+                            kdialog --geometry 600x800 --textbox /opt/sifter/info/vulnx.info
+                            cat /opt/sifter/info/vulnx.info
+                            ;;
+
+                        "Module Menu")
+                            modules
+                            ;;
+
+                        "Main Menu")
+                            menu
+                            ;;
+
+                    esac
+            done
+    echo -e "${NC}"
+}
+# Menu
+menu(){
+     if [[ -d "/opt/shufti/results" ]]; then
+        sleep 1
+    else
+        mkdir /opt/shufti/results
+    fi
+    echo -e "${INV}${LGRY}"
+    figlet -f big "'..SHUFTI..'"
+    echo -e "${LP}"
+    figlet -f small "__*..vaibhavkrjha..*__"
+    echo -e "${RED}//////////========${URED}OS${UBLUE}v1.0${URED})${RED}========\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\${NC}"
+    echo -e "${W}======Hit ${YLW}Ctrl + C${W} at any time to exit from shufti======${NC}"
+    arg=$1
+    echo -e "${ORNG}"
+    PS3='What would you like to do?'
+            options=("Check Hosts" "Edit Host List" "Parse Results to Modules" "Update" "Quit")
+            select opt in "${options[@]}"
+            do
+                case $opt in
+                    "Check Hosts")
+                        TARLIST=$(cat files/host_list.txt | grep "eg. target.com")
+                        if [[ ${TARLIST} == "eg. target.com" ]]; then
+                            rm /opt/shufti/files/host_list.txt
+                            touch /opt/shufti/files/host_list.txt
+                            echo -e "${W}Please add targets to the list${NC}"
+                            sleep 2
+                            nano /opt/shufti/files/host_list.txt
+                        else
+                            sleep 1
+                        fi
+                        check_hosts
+                        ;;
+
+                    "Edit Host List")
+                        nano /opt/shufti/files/host_list.txt
+                        ;;
+
+                    "Parse Results to Modules")
+                        modules
+                        ;;
+
+		            "Update")
+		                update
+                        reset
+                        shufti
+                        ;;
+
+                    "Quit")
+                        exit 2
+                        ;;
+                esac
+            done
+    echo -e "${NC}"
+}
+# Update Arg
+up_arg(){
+    echo $1 >> temp.log
+    echo $2 >> temp.log
+    echo $3 >> temp.log
+    echo $4 >> temp.log
+    echo $5 >> temp.log
+    echo $6 >> temp.log
+    echo $7 >> temp.log
+    echo $8 >> temp.log
+    echo $9 >> temp.log
+
+    for UFILES in `cat temp.log`
+       	        do
+    	            rm ${LPATH}${UFILES}
+                done
+    rm /opt/shufti/temp.log
+}
+update(){
+    sudo chown $USER:$USER -R /opt/shufti
+    cd /opt/shufti
+    echo -e "${ORNG}"
+    figlet -f mini "Checking for updates"
+    echo -e "${NC}"
+    git fetch
+    VER=$(git pull)
+    if [[ ${VER} == "Already up to date." ]]; then
+        echo -e "${LP}"
+        figlet -f mini "Up to date."
+        echo -e "${NC}"
+    else
+	    sleep 5
+	    echo -e "${W}Are there pull conflicts with files?(y/n)${NC}"
+        sleep 3
+	    read UANS
+	    if [[ ${UANS} == "y" ]]; then
+            export LPATH
+            echo -e "${W}Please enter the conflicting files (seperated by a space)${NC}"
+		    read FILES
+            sleep 2
+		    up_arg ${FILES}
+		    git pull
+	    else
+		    sleep 1
+	    fi
+        ./install.sh
+        sudo cp shifti -t /usr/sbin
+        sudo chown $USER:$USER /opt/shufti --recursive
+        sudo chown $USER:$USER /usr/sbin/shufti
+        chmod +x /opt/shufti --recursive
+        chmod +x /usr/sbin/shufti
+        echo -e "${W}Done!${NC}"
+    fi
+}
+
+cd /opt/sifter
+while getopts "a:wandwirmecvuhz" options; do            	# Loop: Get the next option;
+	case "${options}" in                                	# use silent error checking;
+                                                            # option a takes 1 arguments.
+		c)
+			echo -e "${YLW}"
+			figlet -f mini "Checking for live targets..."
+			echo -e "${NC}"
+			check_hosts
+            modules
+			;;
+
+		a)
+			echo -e "${ORNG}"
+			figlet -f mini "Adding $ARG to host list"
+			echo -e "${NC}"
+            TARLIST=$(cat /opt/shufti/files/host_list.txt)
+            if [[ ${TARLIST} == "eg. target.com" ]]; then
+                rm /opt/shufti/files/host_list.txt
+                touch /opt/shufti/files/host_list.txt
+            else
+                sleep 1
+            fi
+			echo "$ARG" >> files/host_list.txt
+			sleep 2
+			modules
+			;;
+
+		i)
+			echo -e "${LP}"
+			figlet -f mini "Info Gatherers"
+			echo -e "${NC}"
+			cred_mods
+			;;
+
+		d)
+			echo -e "${LP}"
+			figlet -f mini "Domain-Fuzzers"
+			echo -e "${NC}"
+			dom_mods
+			;;
+
+		e)
+			echo -e "${LP}"
+			figlet -f mini "Exploitative Modules"
+			echo -e "${NC}"
+			ex_mods
+			;;
+
+		n)
+			echo -e "${LP}"
+			figlet -f mini "Network Mappers"
+			echo -e "${NC}"
+			net_mods
+			;;
+
+		v)
+			echo -e "${LP}"
+			figlet -f mini "Vulnerability Scanners"
+			echo -e "${NC}"
+			vuln_mods
+			;;
+
+		wa)
+			echo -e "${LP}"
+			figlet -f mini "Web-App Testers"
+			echo -e "${NC}"
+			webapps
+			;;
+
+		w)
+			echo -e "${LP}"
+			figlet -f mini "Web Recon"
+			echo -e "${NC}"
+			web_mods
+			;;
+
+        r)
+            echo -e "${LP}"
+            figlet -f mini "Shufti results"
+            echo -e "${NC}"
+            results
+            ;;
+
+        u)
+            update
+      		;;
+
+		h)
+			echo -e "${RED}"
+			figlet "SifteR"
+			echo -e "${NC}"
+			usage
+			;;
+
+        z)
+            echo -e "${RED}"
+            figlet -f mini "Module Info"
+            echo -e "${NC}"
+            main_info
+            ;;
+
+        m)
+            echo -e "${RED}"
+            figlet -f mini "Sifter Modules"
+            echo -e "${NC}"
+            modules
+            ;;
+
+	esac
+done
+if [[ $OPTIND == 1 ]]; then				# if no option is passed
+	menu		  	                    # default command is run
+fi
+exit 0
+
+
+
+##########################______________ For_The_Community_By_The_Community ______________##########################
