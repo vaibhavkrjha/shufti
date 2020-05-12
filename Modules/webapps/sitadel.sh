@@ -108,7 +108,6 @@ echo "==========================================================================
 sudo python3 sitadel.py -r ${RISKLVL} ${FREDIR} -t ${TIMO} ${UC} ${COOKIE} -f ${FP_MODULE} -a ${ATK_MODULE} --config $CONF ${VERB} ${TARGET}
 echo "=============================================================================================================="
 sleep 2
-cd /opt/sifter
-sifter -m
+cd /opt/shufti
+shufti -m
 
-##########################______________ czFsM250NzggX18gUmFiYjE3J3MgRGVu ______________##########################
