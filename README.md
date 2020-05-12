@@ -6,8 +6,8 @@ Shufti is an Advance Open Source Intelligence Framework, made by gathering many 
 
 	* This will download and install all required tools
 	*
-	$ git clone https://github.com/s1l3nt78/sifter.git
-	$ cd sifter
+	$ git clone https://github.com/vaibhavkrjha/shufti.git
+	$ cd shufti
 	$ chmod +x install.sh
 	$ ./install.sh
 
