@@ -25,7 +25,7 @@ t_ans(){
 }
 
 # AapFinder Start
-if [[ -d '/opt/sifter/results/AapFinder' ]]; then
+if [[ -d '/opt/shufti/results/AapFinder' ]]; then
     sleep 2
 else
     mkdir /opt/shufti/results/AapFinder
@@ -51,8 +51,8 @@ echo -e "${W}Please enter the name of the output file${NC}"
 read OUTPUT
 echo -e "${W}===========================================================================${NC}"
 sudo python3 aapfinder.py --targets targets.txt -d ${DELAY} ${THREAD} -t ${TYPE} -o /opt/sifter/results/AapFinder/${OUTPUT}.txt
-echo -e "${YLW}Results have been saved to /opt/sifter/results/AapFinder/${OUTPUT}.txt${NC}"
+echo -e "${YLW}Results have been saved to /opt/shufti/results/AapFinder/${OUTPUT}.txt${NC}"
 echo -e "${W}===========================================================================${NC}"
 cd /opt/shufti
-sifter -m
+shufti -m
 
