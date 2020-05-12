@@ -48,7 +48,6 @@ else
 	bfac ${URL}
 fi
 sleep 5
-cd /opt/sifter
-./sifter -m
+cd /opt/shufti
+./shufti -m
 
-##########################______________ czFsM250NzggX18gUmFiYjE3J3MgRGVu ______________##########################
