@@ -2,6 +2,8 @@
 
 Shufti is an Foremost Open Source Intelligence Framework, made by gathering many n number of tools all together under a single framwork to ease various process of recon, network firewall checking, vulnerability scanning, exploiting the pathched ones,enumerating the hosts. All the gathered outcomes will be saved in the designated Result Folder. We will keep adding the latest Tools in Shufti to reduce the toil of security researcher.
 
+# Updation in process | Looking for contributors
+
 # Installation:
 
 	* This will download and install all required tools
